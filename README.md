@@ -1,5 +1,3 @@
-### Hi there 👋
-
 <!--
 **scottdraper8/scottdraper8** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
 
@@ -14,3 +12,8 @@ Here are some ideas to get you started:
 - 😄 Pronouns: ...
 - ⚡ Fun fact: ...
 -->
+
+# under construction, excuse the mess 😄
+<br/>
+<br/>
+<img src="https://api.daily.dev/devcards/f3a22afb5964474489ef81041ae35145.png?r=m8q" width="300" alt="daily.dev card"/>
