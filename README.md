@@ -13,7 +13,7 @@ Here are some ideas to get you started:
 - ⚡ Fun fact: ...
 -->
 
-# under construction, excuse the mess 😄
+# under construction, excuse the mess
 <br/>
 <br/>
 <img src="https://github.com/scottdraper8/scottdraper8/blob/main/devcard.svg" width="300" alt="daily.dev card"/>
