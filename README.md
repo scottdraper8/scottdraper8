@@ -16,4 +16,4 @@ Here are some ideas to get you started:
 # under construction, excuse the mess 😄
 <br/>
 <br/>
-<img src="https://api.daily.dev/devcards/f3a22afb5964474489ef81041ae35145.png?r=m8q" width="300" alt="daily.dev card"/>
+<img src="https://github.com/scottdraper8/scottdraper8/blob/main/devcard.svg" width="300" alt="daily.dev card"/>
