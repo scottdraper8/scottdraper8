@@ -63,7 +63,7 @@ else:
     E_PASS_KEY = json.load(open(f'{parent_dir}\\credentials.json'))['email']['p']
     G_PASS_KEY = json.load(open(f'{parent_dir}\\credentials.json'))['github']['p']
 # ---------------------------------------------------------------------------------------------- #
-opts.add_argument('--headless') #TODO remove after development
+# opts.add_argument('--headless') #TODO remove after development
 
 
 # LAUNCH CHROMEDRIVER
@@ -71,9 +71,6 @@ opts.add_argument('--headless') #TODO remove after development
 driver = webdriver.Chrome(service=Service(
     ChromeDriverManager().install()), options=opts)
 driver.get('https://app.daily.dev/')
-if not os.environ.get('ON_HEROKU'):
-    driver.set_window_position(-1000, 0)
-    driver.maximize_window()
 # ---------------------------------------------------------------------------------------------- #
 
 
@@ -143,11 +140,18 @@ try:
     [driver.execute_script(f'window.open("about:blank", "tab{x}");') for x in range(0, 21)]
     for i, url in enumerate(article_urls):
         if i % 20 == 0 and i > 0:
-            print(f'Reading articles {i / 20} to {i / 20 + 20} of {len(article_urls)}...')
+            print(f'Reading articles {i - 20} to {i} of {len(article_urls)}...')
             current_urls = [article_urls[i] for i in range(i - 20, i + 1)]
             for x, link in enumerate(current_urls):
                 driver.switch_to.window(f'tab{x}')
                 driver.get(link)
+        elif i % 20 != 0 and i + 20 > len(article_urls):
+            print(f'Reading articles {i} to {len(article_urls)} of {len(article_urls)}...')
+            current_urls = [article_urls[i] for i in range(i, len(article_urls))]
+            for x, link in enumerate(current_urls):
+                driver.switch_to.window(f'tab{x}')
+                driver.get(link)
+            break
 except Exception as e:
     send_email('Daily.dev Auto Article Reader Failure', 
         f'''Your Daily.dev Auto Article Reader was unable to read all the collected articles.
@@ -160,6 +164,6 @@ except Exception as e:
 # FINISH AND REPORT
 # ---------------------------------------------------------------------------------------------- #
 send_email('Daily.dev Auto Article Reader Success', 
-        f'Your Daily.dev Auto Article Reader collected and a read a total of {len(article_urls)} articles. Great work!')
+        f'Your Daily.dev Auto Article Reader collected and read a total of {len(article_urls)} articles. Great work!')
 driver.quit()
 # ---------------------------------------------------------------------------------------------- #
