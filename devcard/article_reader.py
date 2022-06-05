@@ -6,7 +6,6 @@ import time
 import json
 import smtplib
 from selenium import webdriver
-from fake_useragent import UserAgent
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.chrome.options import Options
@@ -43,14 +42,13 @@ def send_email(subject, body):
 # CHROMEDRIVER & ENV CONFIGS
 # ---------------------------------------------------------------------------------------------- #
 opts = Options()
-user_agent = UserAgent().random
 opts.add_argument('--no-sandbox')
 opts.add_argument('--log-level=3')
 opts.add_argument('--disable-gpu')
 opts.add_argument("--start-maximized")
 opts.add_argument("--window-size=1920,1080")
 opts.add_argument('--disable-dev-shm-usage')
-opts.add_argument(f'user-agent={user_agent}')
+opts.add_argument('user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/102.0.5005.61 Safari/537.36}')
 if os.environ.get('ON_HEROKU'):
     opts.add_argument('--headless')
     opts.binary_location = os.environ.get('GOOGLE_CHROME_BIN')
