@@ -1,0 +1,1 @@
+worker: devcard/article_reader.py
