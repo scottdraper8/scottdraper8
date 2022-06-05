@@ -61,6 +61,7 @@ try:
 except:
     WebDriverWait(driver, timeout=10).until(lambda d: d.find_element(by=By.XPATH, value='//h1[@data-test-selector="github-mobile-challenge"]'))
     print(driver.find_element(by=By.XPATH, value='//h1[@data-test-selector="github-mobile-challenge"]').text)
+    WebDriverWait(driver, timeout=60).until(lambda d: d.find_element(by=By.XPATH, value='//img[@alt="scottdraper\'s profile"]'))
 # ---------------------------------------------------------------------------------------------- #
 
 
