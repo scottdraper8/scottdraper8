@@ -1,1 +1,1 @@
-worker: devcard/article_reader.py
+worker: python devcard/article_reader.py
