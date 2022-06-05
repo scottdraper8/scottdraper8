@@ -116,7 +116,7 @@ try:
     driver.get('https://app.daily.dev/my-feed')
     WebDriverWait(driver, timeout=10).until(lambda d: d.find_element(by=By.XPATH, value='//img[@alt="scottdraper\'s profile"]'))
     no_change_count = 0
-    while len(article_urls) < 1000:
+    while len(article_urls) < 350:
         if no_change_count == 1:
             print(f'Collected {len(article_urls)} articles')
         for url in driver.find_elements(by=By.XPATH, value='//article/a'):
@@ -130,7 +130,7 @@ try:
 except Exception as e:
     send_email('Daily.dev Auto Article Reader Failure', 
         f'''Your Daily.dev Auto Article Reader was unable to collect the designated number of articles to read.
-        {len(article_urls)} of 1000 articles were collected. 
+        {len(article_urls)} of 350 articles were collected. 
         Error Message:\n{e}''')
     driver.quit()
     sys.exit()
@@ -140,17 +140,17 @@ except Exception as e:
 # READ COLLECTED ARTICLES
 # ---------------------------------------------------------------------------------------------- #
 try:
-    [driver.execute_script(f'window.open("about:blank", "tab{x}");') for x in range(0, 21)]
+    [driver.execute_script(f'window.open("about:blank", "tab{x}");') for x in range(0, 5)]
     driver.switch_to.window(driver.window_handles[0])
     driver.close()
     for i, url in enumerate(article_urls):
-        if i % 20 == 0 and i > 0:
-            print(f'Reading articles {i - 20} to {i} of {len(article_urls)}...')
-            current_urls = [article_urls[i] for i in range(i - 20, i + 1)]
+        if i % 4 == 0 and i > 0:
+            print(f'Reading articles {i - 4} to {i} of {len(article_urls)}...')
+            current_urls = [article_urls[i] for i in range(i - 4, i + 1)]
             for x, link in enumerate(current_urls):
                 driver.switch_to.window(f'tab{x}')
                 driver.get(link)
-        elif i % 20 != 0 and i + 20 > len(article_urls):
+        elif i % 4 != 0 and i + 4 > len(article_urls):
             print(f'Reading articles {i} to {len(article_urls)} of {len(article_urls)}...')
             current_urls = [article_urls[i] for i in range(i, len(article_urls))]
             for x, link in enumerate(current_urls):
