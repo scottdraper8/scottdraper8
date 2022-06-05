@@ -140,7 +140,10 @@ except Exception as e:
 # ---------------------------------------------------------------------------------------------- #
 try:
     for i, url in enumerate(article_urls):
-        print(f'Reading articles {i} of {len(article_urls)}...')
+        if i + 1 == len(article_urls):
+            print(f'Read all {len(article_urls)} articles')
+        elif i % 25 == 0 and i not in [0, len(article_urls) - 1]:
+            print(f'Read {i} articles of {len(article_urls)}')
         driver.get(url)
 except Exception as e:
     send_email('Daily.dev Auto Article Reader Failure', 
