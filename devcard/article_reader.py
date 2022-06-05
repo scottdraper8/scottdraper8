@@ -68,8 +68,8 @@ else:
 
 # LAUNCH CHROMEDRIVER
 # ---------------------------------------------------------------------------------------------- #
-driver = webdriver.Chrome(service=Service(
-    ChromeDriverManager().install()), options=opts)
+opts.add_argument('--headless')
+driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=opts)
 driver.get('https://app.daily.dev/')
 # ---------------------------------------------------------------------------------------------- #
 
@@ -83,11 +83,9 @@ try:
     driver.find_element(by=By.XPATH, value='(//button/span)[13]').click()
     WebDriverWait(driver, timeout=10).until(lambda d: d.find_element(by=By.XPATH, value='//input[@name="login"]'))
     driver.find_element(by=By.XPATH, value='//input[@name="login"]').send_keys(G_U_NAME)
-    time.sleep(1)
     driver.find_element(by=By.XPATH, value='//input[@type="password"]').send_keys(G_PASS_KEY)
-    print(G_PASS_KEY)
-    time.sleep(1)
-    driver.find_element(by=By.XPATH, value='//input[@type="submit"]').click()
+    print('pass:', driver.find_element(by=By.XPATH, value='//input[@type="password"]').get_attribute('value'))
+    # driver.find_element(by=By.XPATH, value='//input[@type="submit"]').click()
 
     # overcome GitHub's device verification
     try:
