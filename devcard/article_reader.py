@@ -116,7 +116,7 @@ try:
     driver.get('https://app.daily.dev/my-feed')
     WebDriverWait(driver, timeout=10).until(lambda d: d.find_element(by=By.XPATH, value='//img[@alt="scottdraper\'s profile"]'))
     no_change_count = 0
-    while len(article_urls) < 300:
+    while len(article_urls) < 1000:
         if no_change_count == 1:
             print(f'Collected {len(article_urls)} articles')
         for url in driver.find_elements(by=By.XPATH, value='//article/a'):
@@ -130,7 +130,7 @@ try:
 except Exception as e:
     send_email('Daily.dev Auto Article Reader Failure', 
         f'''Your Daily.dev Auto Article Reader was unable to collect the designated number of articles to read.
-        {len(article_urls)} of 300 articles were collected. 
+        {len(article_urls)} of 1000 articles were collected. 
         Error Message:\n{e}''')
     driver.quit()
     sys.exit()
