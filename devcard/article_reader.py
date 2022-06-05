@@ -139,23 +139,9 @@ except Exception as e:
 # READ COLLECTED ARTICLES
 # ---------------------------------------------------------------------------------------------- #
 try:
-    [driver.execute_script(f'window.open("about:blank", "tab{x}");') for x in range(0, 5)]
-    driver.switch_to.window(driver.window_handles[0])
-    driver.close()
     for i, url in enumerate(article_urls):
-        if i % 4 == 0 and i > 0:
-            print(f'Reading articles {i - 4} to {i} of {len(article_urls)}...')
-            current_urls = [article_urls[i] for i in range(i - 4, i + 1)]
-            for x, link in enumerate(current_urls):
-                driver.switch_to.window(f'tab{x}')
-                driver.get(link)
-        elif i % 4 != 0 and i + 4 > len(article_urls):
-            print(f'Reading articles {i} to {len(article_urls)} of {len(article_urls)}...')
-            current_urls = [article_urls[i] for i in range(i, len(article_urls))]
-            for x, link in enumerate(current_urls):
-                driver.switch_to.window(f'tab{x}')
-                driver.get(link)
-            break
+        print(f'Reading articles {i} of {len(article_urls)}...')
+        driver.get(url)
 except Exception as e:
     send_email('Daily.dev Auto Article Reader Failure', 
         f'''Your Daily.dev Auto Article Reader was unable to read all the collected articles.
