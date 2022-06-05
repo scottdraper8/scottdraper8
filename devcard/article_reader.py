@@ -143,11 +143,11 @@ try:
     [driver.execute_script(f'window.open("about:blank", "tab{x}");') for x in range(0, 21)]
     for i, url in enumerate(article_urls):
         if i % 20 == 0 and i > 0:
+            print(f'Reading articles {i / 20} to {i / 20 + 20} of {len(article_urls)}...')
             current_urls = [article_urls[i] for i in range(i - 20, i + 1)]
             for x, link in enumerate(current_urls):
                 driver.switch_to.window(f'tab{x}')
                 driver.get(link)
-                print(f'URL {(i - 20) + x} of 60', driver.current_url)
 except Exception as e:
     send_email('Daily.dev Auto Article Reader Failure', 
         f'''Your Daily.dev Auto Article Reader was unable to read all the collected articles.
