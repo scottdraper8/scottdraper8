@@ -6,6 +6,7 @@ import time
 import json
 import smtplib
 from selenium import webdriver
+from fake_useragent import UserAgent
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.chrome.options import Options
@@ -42,12 +43,14 @@ def send_email(subject, body):
 # CHROMEDRIVER & ENV CONFIGS
 # ---------------------------------------------------------------------------------------------- #
 opts = Options()
+user_agent = UserAgent().random
 opts.add_argument('--no-sandbox')
 opts.add_argument('--log-level=3')
 opts.add_argument('--disable-gpu')
 opts.add_argument("--start-maximized")
 opts.add_argument("--window-size=1920,1080")
 opts.add_argument('--disable-dev-shm-usage')
+opts.add_argument(f'user-agent={user_agent}')
 if os.environ.get('ON_HEROKU'):
     opts.add_argument('--headless')
     opts.binary_location = os.environ.get('GOOGLE_CHROME_BIN')
@@ -63,7 +66,7 @@ else:
     E_PASS_KEY = json.load(open(f'{parent_dir}\\credentials.json'))['email']['p']
     G_PASS_KEY = json.load(open(f'{parent_dir}\\credentials.json'))['github']['p']
 # ---------------------------------------------------------------------------------------------- #
-# opts.add_argument('--headless') #TODO remove after development
+opts.add_argument('--headless') #TODO remove after development
 
 
 # LAUNCH CHROMEDRIVER
@@ -113,7 +116,7 @@ try:
     driver.get('https://app.daily.dev/my-feed')
     WebDriverWait(driver, timeout=10).until(lambda d: d.find_element(by=By.XPATH, value='//img[@alt="scottdraper\'s profile"]'))
     no_change_count = 0
-    while len(article_urls) < 1000:
+    while len(article_urls) < 300:
         if no_change_count == 1:
             print(f'Collected {len(article_urls)} articles')
         for url in driver.find_elements(by=By.XPATH, value='//article/a'):
@@ -127,7 +130,7 @@ try:
 except Exception as e:
     send_email('Daily.dev Auto Article Reader Failure', 
         f'''Your Daily.dev Auto Article Reader was unable to collect the designated number of articles to read.
-        {len(article_urls)} of 1000 articles were collected. 
+        {len(article_urls)} of 300 articles were collected. 
         Error Message:\n{e}''')
     driver.quit()
     sys.exit()
@@ -138,6 +141,8 @@ except Exception as e:
 # ---------------------------------------------------------------------------------------------- #
 try:
     [driver.execute_script(f'window.open("about:blank", "tab{x}");') for x in range(0, 21)]
+    driver.switch_to.window(driver.window_handles[0])
+    driver.close()
     for i, url in enumerate(article_urls):
         if i % 20 == 0 and i > 0:
             print(f'Reading articles {i - 20} to {i} of {len(article_urls)}...')
