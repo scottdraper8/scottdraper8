@@ -14,6 +14,8 @@ from webdriver_manager.chrome import ChromeDriverManager
 opts = Options()
 opts.add_argument('--no-sandbox')
 opts.add_argument('--disable-gpu')
+opts.add_argument("--start-maximized")
+opts.add_argument("--window-size=1920,1080")
 opts.add_argument('--disable-dev-shm-usage')
 if os.environ.get('ON_HEROKU'):
     opts.add_argument('--headless')
@@ -26,6 +28,8 @@ else:
     PASS_KEY = json.load(open(f'{os.path.dirname(os.path.realpath(__file__))}\\credentials.json'))['p']
 
 
+opts.add_argument('--headless') #TODO remove after development
+
 # LAUNCH CHROMEDRIVER
 driver = webdriver.Chrome(service=Service(
     ChromeDriverManager().install()), options=opts)
@@ -34,8 +38,8 @@ if not os.environ.get('ON_HEROKU'):
     driver.set_window_position(-1000, 0)
     driver.maximize_window()
 
-
 # LOG IN TO DAILY.DEV VIA GITHUB
+WebDriverWait(driver, timeout=30).until(lambda d: d.find_element(by=By.XPATH, value='//span[text()="Access all features"]'))
 driver.find_element(by=By.XPATH, value='//span[text()="Access all features"]').click()
 WebDriverWait(driver, timeout=30).until(lambda d: d.find_element(by=By.XPATH, value='(//button/span)[13]'))
 driver.find_element(by=By.XPATH, value='(//button/span)[13]').click()
