@@ -1,4 +1,5 @@
 # DEPENDENCIES
+# ---------------------------------------------------------------------------------------------- #
 import os
 import time
 import json
@@ -8,9 +9,11 @@ from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.support.ui import WebDriverWait
 from webdriver_manager.chrome import ChromeDriverManager
+# ---------------------------------------------------------------------------------------------- #
 
 
 # CHROMEDRIVER & ENV CONFIGS
+# ---------------------------------------------------------------------------------------------- #
 opts = Options()
 opts.add_argument('--no-sandbox')
 opts.add_argument('--disable-gpu')
@@ -26,19 +29,23 @@ else:
     opts.binary_location = 'C:\\Program Files\\BraveSoftware\\Brave-Browser\\Application\\brave.exe'
     U_NAME = json.load(open(f'{os.path.dirname(os.path.realpath(__file__))}\\credentials.json'))['u']
     PASS_KEY = json.load(open(f'{os.path.dirname(os.path.realpath(__file__))}\\credentials.json'))['p']
-
-
+# ---------------------------------------------------------------------------------------------- #
 opts.add_argument('--headless') #TODO remove after development
 
+
 # LAUNCH CHROMEDRIVER
+# ---------------------------------------------------------------------------------------------- #
 driver = webdriver.Chrome(service=Service(
     ChromeDriverManager().install()), options=opts)
 driver.get('https://app.daily.dev/')
 if not os.environ.get('ON_HEROKU'):
     driver.set_window_position(-1000, 0)
     driver.maximize_window()
+# ---------------------------------------------------------------------------------------------- #
+
 
 # LOG IN TO DAILY.DEV VIA GITHUB
+# ---------------------------------------------------------------------------------------------- #
 WebDriverWait(driver, timeout=10).until(lambda d: d.find_element(by=By.XPATH, value='//span[text()="Access all features"]'))
 driver.find_element(by=By.XPATH, value='//span[text()="Access all features"]').click()
 WebDriverWait(driver, timeout=10).until(lambda d: d.find_element(by=By.XPATH, value='(//button/span)[13]'))
@@ -47,7 +54,14 @@ WebDriverWait(driver, timeout=10).until(lambda d: d.find_element(by=By.XPATH, va
 driver.find_element(by=By.XPATH, value='//input[@name="login"]').send_keys(U_NAME)
 driver.find_element(by=By.XPATH, value='//input[@type="password"]').send_keys(PASS_KEY)
 driver.find_element(by=By.XPATH, value='//input[@type="submit"]').click()
-time.sleep(5)
-print(driver.page_source)
-WebDriverWait(driver, timeout=10).until(lambda d: d.find_element(by=By.XPATH, value='//img[@alt="scottdraper\'s profile"]'))
+
+# overcome GitHub's device verification
+try:
+    WebDriverWait(driver, timeout=10).until(lambda d: d.find_element(by=By.XPATH, value='//img[@alt="scottdraper\'s profile"]'))
+except:
+    WebDriverWait(driver, timeout=10).until(lambda d: d.find_element(by=By.XPATH, value='//h1[@data-test-selector="github-mobile-challenge"]'))
+    print(driver.find_element(by=By.XPATH, value='//h1[@data-test-selector="github-mobile-challenge"]').text)
+# ---------------------------------------------------------------------------------------------- #
+
+
 driver.quit()
