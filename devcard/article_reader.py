@@ -48,6 +48,6 @@ driver.find_element(by=By.XPATH, value='//input[@name="login"]').send_keys(U_NAM
 driver.find_element(by=By.XPATH, value='//input[@type="password"]').send_keys(PASS_KEY)
 driver.find_element(by=By.XPATH, value='//input[@type="submit"]').click()
 time.sleep(5)
-driver.save_screenshot('post-github-login.png')
+print(driver.page_source)
 WebDriverWait(driver, timeout=10).until(lambda d: d.find_element(by=By.XPATH, value='//img[@alt="scottdraper\'s profile"]'))
 driver.quit()
