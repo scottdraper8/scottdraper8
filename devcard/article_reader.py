@@ -84,8 +84,7 @@ try:
     WebDriverWait(driver, timeout=10).until(lambda d: d.find_element(by=By.XPATH, value='//input[@name="login"]'))
     driver.find_element(by=By.XPATH, value='//input[@name="login"]').send_keys(G_U_NAME)
     driver.find_element(by=By.XPATH, value='//input[@type="password"]').send_keys(G_PASS_KEY)
-    print('pass:', driver.find_element(by=By.XPATH, value='//input[@type="password"]').get_attribute('value'))
-    # driver.find_element(by=By.XPATH, value='//input[@type="submit"]').click()
+    driver.find_element(by=By.XPATH, value='//input[@type="submit"]').click()
 
     # overcome GitHub's device verification
     try:
