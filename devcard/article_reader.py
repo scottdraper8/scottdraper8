@@ -90,6 +90,9 @@ try:
     try:
         WebDriverWait(driver, timeout=10).until(lambda d: d.find_element(by=By.XPATH, value='//img[@alt="scottdraper\'s profile"]'))
     except:
+        driver.save_screenshot('page.png')
+        with open('page_source.txt', 'w') as f:
+            f.write(driver.page_source)
         WebDriverWait(driver, timeout=10).until(lambda d: d.find_element(by=By.XPATH, value='//h1[@data-test-selector="github-mobile-challenge"]'))
         auth_code = driver.find_element(by=By.XPATH, value='//h1[@data-test-selector="github-mobile-challenge"]').text
         send_email('GitHub Auth Code', 
