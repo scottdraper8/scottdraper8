@@ -13,7 +13,8 @@ Here are some ideas to get you started:
 - ⚡ Fun fact: ...
 -->
 
-# under construction, excuse the mess
+# currently building my GitHub profile, check back later!
 <br/>
 <br/>
 <img src="https://github.com/scottdraper8/scottdraper8/blob/main/devcard.svg" width="300" alt="daily.dev card"/>
+![Scott's GitHub stats](https://github-readme-stats.vercel.app/api?username=scottdraper8&show_icons=true&theme=radical)
