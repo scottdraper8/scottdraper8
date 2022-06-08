@@ -14,7 +14,8 @@ Here are some ideas to get you started:
 -->
 
 # Currently building my GitHub profile, check back later!
-<br/>
-<br/>
+![Scott's GitHub Stats](https://github-readme-stats.vercel.app/api?username=scottdraper8&count_private=true&show_icons=true&hide_border=true&theme=cobalt)
+[![Top Langs](https://github-readme-stats.vercel.app/api/top-langs/?username=scottdraper8&count_private=true&hide_border=true&layout=compact&theme=cobalt)](https://github.com/scottdraper8/github-readme-stats)
+[![Scott's Wakatime Stats](https://github-readme-stats.vercel.app/api/wakatime?username=scottdraper8)](https://github.com/scottdraper8/github-readme-stats)
 <img src="https://github.com/scottdraper8/scottdraper8/blob/main/devcard.svg" width="300" alt="daily.dev card"/>
-<img src="https://github-readme-stats.vercel.app/api?username=scottdraper8&show_icons=true&hide_border=true&theme=cobalt" alt="Scott's GitHub Stats"/>
+<img src="https://stackoverflow-card.vercel.app/?userID=353337&theme=stackoverflow-dark"/>
