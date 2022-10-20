@@ -14,6 +14,7 @@ Here are some ideas to get you started:
 -->
 
 # Currently building my GitHub profile, check back later!
+### Note: the dashboards aren't super accurate at the moment, I haven't integrated wakatime into all my environments yet
 ![Scott's GitHub Stats](https://github-readme-stats.vercel.app/api?username=scottdraper8&count_private=true&show_icons=true&hide_border=true&theme=cobalt)
 ![Top Langs](https://github-readme-stats.vercel.app/api/top-langs/?username=scottdraper8&count_private=true&hide_border=true&layout=compact&theme=cobalt)
 ![Coding Activity](https://wakatime.com/share/@scottdraper8/48a5b54c-f425-43d3-8a92-c4e7dedef42c.svg)
