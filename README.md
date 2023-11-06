@@ -19,4 +19,3 @@ Here are some ideas to get you started:
 ![Top Langs](https://github-readme-stats.vercel.app/api/top-langs/?username=scottdraper8&count_private=true&hide_border=true&layout=compact&theme=cobalt)
 ![Coding Activity](https://wakatime.com/share/@scottdraper8/48a5b54c-f425-43d3-8a92-c4e7dedef42c.svg)
 <img src="https://github.com/scottdraper8/scottdraper8/blob/main/devcard.svg" width="300" alt="daily.dev card"/>
-<img src="https://stackoverflow-card.vercel.app/?userID=353337&theme=stackoverflow-dark"/>
